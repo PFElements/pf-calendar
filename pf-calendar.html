@@ -1,0 +1,104 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../pf-calendar-events/pf-calendar-events.html">
+<link rel="import" href="../pf-calendar-events-data/pf-calendar-events-data.html">
+
+
+<!--
+`pf-calendar`
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="pf-calendar">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <style is="custom-style">
+
+
+
+    </style>
+
+    <pf-calendar-events-data
+            databasename="[[databasename]]"
+            databasepath="[[databasepath]]"
+            data="{{data}}"
+            filterAttr="[[filterAttr]]"
+            filterValue="[[filterValue]]"></pf-calendar-events-data>
+    <pf-calendar-events id="pfcalendar" data="[[data]]" calendarstyle="[[calendarstyle]]" data={{eventsdata}}
+    ></pf-calendar-events>
+  </template>
+
+  <script>
+    class PFcalendar extends Polymer.Element {
+      static get is() { return 'pf-calendar'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'pf-calendar'
+          },
+          date: {
+            type: Object
+          },
+          calendarstyle:{
+            type:String
+          },
+          evedata:{
+            type:Object,
+            notify:true
+          },
+          databasename:{
+            type:String
+          },
+        databasepath: {
+          type:String
+        },
+          filterAttr:{
+            type:String
+        },
+        filterValue:{
+          type:String
+        }
+
+        };
+      }
+      ready() {
+        super.ready();
+        this.$.pfcalendar.addEventListener('date-select', e => this._dateselect(e)
+      );
+        this.$.pfcalendar.addEventListener('event-select', e => this._eventselect(e)
+      );
+        this.$.pfcalendar.addEventListener('event-edit', e => this._eventedit(e)
+      );
+        this.$.pfcalendar.addEventListener('event-delete', e => this._eventdelete(e)
+      );
+        this.$.pfcalendar.addEventListener('event-add', e => this._eventadd(e)
+      );
+      }
+      _dateselect(e) {
+
+        this.dispatchEvent(new CustomEvent('date-select', { detail: { date: e.detail.date, events: e.detail.events} }));
+      }
+      _eventselect(e) {
+        this.dispatchEvent(new CustomEvent('event-select', { detail: { event: e.detail.event } }));
+      }
+      _eventedit(e) {
+        this.dispatchEvent(new CustomEvent('event-edit', { detail: { event: e.detail.event } }));
+      }
+      _eventdelete(e) {
+        this.dispatchEvent(new CustomEvent('event-delete', { detail: { event: e.detail.event } }));
+      }
+      _eventadd(e) {
+        this.dispatchEvent(new CustomEvent('event-add', { detail: { date: e.detail.date } }));
+      }
+
+    }
+    window.customElements.define(PFcalendar.is, PFcalendar);
+  </script>
+</dom-module>

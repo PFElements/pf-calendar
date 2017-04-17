@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>pf-calendar demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../pf-calendar.html">
+    <link rel="import" href="test-ele.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic pf-calendar demo</h3>
+      <demo-snippet>
+        <template>
+          <style is="custom-style">
+           </style>
+          <firebase-app
+                  name="pf-calendar-firebase"
+                  api-key="AIzaSyBOML3Qc_rtqDeVAr2ous6Z8-E1FDqH4CI"
+                  auth-domain="pf-calendar-firebase.firebaseapp.com"
+                  database-url="https://pf-calendar-firebase.firebaseio.com">
+          </firebase-app>
+          <test-ele></test-ele>
+           </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
