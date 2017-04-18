@@ -9,8 +9,8 @@ A Polymer 2.0 based collection of reusable web components
 ## Demo
 [Click here for docs & demo](https://github.com/PFElements/pf-calendar/blob/master/demo/index.html)
 
-
 | Element Name | Latest Version (Bower) | Npm version  | Build Status |
+|--------------|------------------------|--------------|--------------|
 | [pf-calendar](https://github.com/PFElements/pf-calendar) | [![GitHub version](https://badge.fury.io/gh/PFElements%2Fpf-calendar.svg)](https://badge.fury.io/gh/PFElements%2Fpf-calendar) | [![npm version](https://badge.fury.io/js/pf-calendar.svg)](https://www.npmjs.com/package/pf-calendar) |[![Build Status](https://travis-ci.org/PFElements/pf-calendar.svg?branch=master)](https://travis-ci.org/PFElements/pf-calendar) | | [pf-calendar-event]|
 
 ## Install the Polymer-CLI
@@ -104,7 +104,8 @@ Comments, questions, suggestions, issues, and pull requests are all welcome.
 
 Joing us at [![Join the chat at https://gitter.im/pf-elements/Lobby](https://badges.gitter.im/pf-elements/Lobby.svg)](https://gitter.im/pf-elements/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-- [Twitter](https://twitter.com/)
+- [Twitter](<a href="https://twitter.com/polymerjs" class="twitter-follow-button" data-show-count="false">Follow @polymerjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>)
+- [Facebook] (https://www.facebook.com/polymerjs)
 
 ### Some ways to help:
 
