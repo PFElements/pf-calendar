@@ -104,7 +104,7 @@ Comments, questions, suggestions, issues, and pull requests are all welcome.
 
 Joing us at [![Join the chat at https://gitter.im/pf-elements/Lobby](https://badges.gitter.im/pf-elements/Lobby.svg)](https://gitter.im/pf-elements/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-- [Twitter](<a href="https://twitter.com/polymerjs" class="twitter-follow-button" data-show-count="false">Follow @polymerjs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>)
+- [Twitter](<a href="https://twitter.com/polymerjs" class="twitter-follow-button" data-show-count="false">Follow @polymerjs</a>)
 - [Facebook] (https://www.facebook.com/polymerjs)
 
 ### Some ways to help:
