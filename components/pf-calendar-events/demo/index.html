@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>pf-calendar demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../pf-calendar-events.html">
+
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic pf-calendar-events demo</h3>
+      <demo-snippet>
+        <template>
+          <style is="custom-style">
+#pf-calendar{
+
+}
+
+
+          </style>
+
+
+          <pf-calendar-events id="pf-calendar" calendarstyle="material-calendar"
+ data='[
+                          { "eventName": "Lunch Meeting w/ Mark", "category": "Work", "color": "orange","date":"1491322091394" },
+                          { "eventName": "Appoint ment With Dr David", "category": "Medical", "color": "yellow","date":"1499185140000" },
+                          { "eventName": "Gev", "category": "sport", "color": "blue","date":"1491581940000" },
+                          { "eventName": "Public Holiday", "category": "holiday", "color": "green","date":"1494173940000" }]'
+          >
+
+          </pf-calendar-events>
+
+
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+<link rel="import" href="../polymerfire/polymerfire.html">
+<!--
+`pf-calendar-events-data`
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="pf-calendar-events-data">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+
+    <firebase-query
+            id="query"
+            app-name="[[databasename]]"
+            path="[[databasepath]]"
+            order-By-Child="[[filterattr]]"
+            equal-To="[[filtervalue]]"
+            data="{{data}}">
+
+
+    </firebase-query>
+  </template>
+
+  <script>
+    class PFCalendarEventsData extends Polymer.Element {
+      static get is() { return 'pf-calendar-events-data'; }
+      static get properties() {
+        return {
+          data:{
+            type:Object,
+            observer: 'dataChanged',
+            notify:true
+          },
+          PFResults:{
+            type:Object,
+            notify:true
+          },
+          databasename: {
+            type:String,
+            value:"pf-calendar-firebase"
+
+
+          },
+          databasepath: {
+            type:String,
+            value:"testdata"
+
+
+          },
+          filterattr:{
+            type: String
+
+          },
+          filtervalue:{
+            type: String
+          }
+        };
+      }
+      dataChanged (newData, oldData) {
+        var d=newData
+        // do something when the query returns values
+      }
+
+      connectedCallback() {
+
+        // query="{ "orderByChild":"Authorized User", "equalTo":"John Doe"}"
+        super.connectedCallback();
+
+
+      }
+    }
+
+    window.customElements.define(PFCalendarEventsData.is, PFCalendarEventsData);
+  </script>
+</dom-module>

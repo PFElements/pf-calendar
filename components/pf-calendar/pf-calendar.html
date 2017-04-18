@@ -1,0 +1,137 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../pf-calendar-events/pf-calendar-events.html">
+<link rel="import" href="../pf-calendar-events-data/pf-calendar-events-data.html">
+
+
+<!--
+### Styling
+The following custom properties and mixins are available for styling:
+
+Custom property                         | Description                             | Default
+----------------------------------------|-----------------------------------------|-------------------------
+`--pf-calendar-bg-color`                |  Calendar background                    | #4A4A4A
+`--pf-calendar-width`                   |  Calendar Width                         | 420px
+`--pf-calendar-height`                  |  Calendar Height                        | 570px
+`--pf-calendar-header-background`       |  Calendar Header Background             | rgba(66, 66, 66, 1)
+`--pf-calendar-header-height`           |  Calendar Header height                 | 50px
+`--pf-calendar-month-title-font-size`   |   Font size of  month on header         | 20px
+`--pf-calendar-month-title-line-height` |  Calendar Header title line Height      | rgba(66, 66, 66, 1)
+`--pf-calendar-header-left-arrow-color` |  Previous Month arrow color             | rgba(160, 159, 160, 1)
+`--pf-calendar-header-right-arrow-color`|  Next Month arrow color                 | rgba(160, 159, 160, 1)
+`--pf-calendar-month-title-color`       |  Month Title color                      | #000
+`--pf-calendar-week-bg`                 |  Background color of week               | #4A4A4A
+`--pf-calendar-day-bg`                  |  Day Background                         | #4A4A4A
+`--pf-calendar-day-color`               |  color of date                          | #000
+`--pf-calendar-other-day-color`         |  color of previous and next month date  | rgba(255, 255, 255, .3)
+`--pf-calendar-today-color`             |  Current date Color                     | rgba(156` 202, 235, 1)
+`--pf-calendar-selected-date-bg`        |  Selected Date Background color         | #000
+`--pf-calendar-selected-date-color`     |  Selected Date color                    | #fff
+`--pf-calendar-day-name-color`          |  Name of Day color e.g(MON,TUE,WED)     | rgba(255` 255, 255, .5)
+`--pf-calendar-event-detail-bg`         |  Event box background                   | rgba(164, 164, 164, 1)
+`--pf-calendar-event-color`              |  color of label "Event"                | #000
+`--pf-calendar-addevent-button-bg-color'|  Add Event Button color                 | rgba(164, 164, 164, 1)
+`--pf-calendar-addevent-button-text-color`| Add Event text color                  | #fff
+`--pf-calendar-addevent-button-hover-color`|  Add event button hover color        | rgba(170, 170, 170, 1)
+`--pf-calendar-addbutton-disply`        |  to hide button set "none"              |inline-block
+`--pf-calendar-deletebutton-disply`     |  to hide button set "none"              |inline
+`--pf-calendar-editbutton-disply`       |  to hide button set "none"              |inline
+`--pf-calendar-legend-bg`               |  Background color of legend bar         | rgba(60, 60, 60, 1)
+
+`pf-calendar`
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="pf-calendar">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <style is="custom-style">
+
+
+
+    </style>
+
+    <pf-calendar-events-data
+            databasename="[[databasename]]"
+            databasepath="[[databasepath]]"
+            data="{{data}}"
+            filterAttr="[[filterAttr]]"
+            filterValue="[[filterValue]]"></pf-calendar-events-data>
+    <pf-calendar-events id="pfcalendar" data="[[data]]" calendarstyle="[[calendarstyle]]" data={{eventsdata}}
+    ></pf-calendar-events>
+  </template>
+
+  <script>
+    class PFcalendar extends Polymer.Element {
+      static get is() { return 'pf-calendar'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'pf-calendar'
+          },
+          date: {
+            type: Object
+          },
+          calendarstyle:{
+            type:String
+          },
+          evedata:{
+            type:Object,
+            notify:true
+          },
+          databasename:{
+            type:String
+          },
+        databasepath: {
+          type:String
+        },
+          filterAttr:{
+            type:String
+        },
+        filterValue:{
+          type:String
+        }
+
+        };
+      }
+      ready() {
+        super.ready();
+        this.$.pfcalendar.addEventListener('date-select', e => this._dateselect(e)
+      );
+        this.$.pfcalendar.addEventListener('event-select', e => this._eventselect(e)
+      );
+        this.$.pfcalendar.addEventListener('event-edit', e => this._eventedit(e)
+      );
+        this.$.pfcalendar.addEventListener('event-delete', e => this._eventdelete(e)
+      );
+        this.$.pfcalendar.addEventListener('event-add', e => this._eventadd(e)
+      );
+      }
+      _dateselect(e) {
+
+        this.dispatchEvent(new CustomEvent('date-select', { detail: { date: e.detail.date, events: e.detail.events} }));
+      }
+      _eventselect(e) {
+        this.dispatchEvent(new CustomEvent('event-select', { detail: { event: e.detail.event } }));
+      }
+      _eventedit(e) {
+        this.dispatchEvent(new CustomEvent('event-edit', { detail: { event: e.detail.event } }));
+      }
+      _eventdelete(e) {
+        this.dispatchEvent(new CustomEvent('event-delete', { detail: { event: e.detail.event } }));
+      }
+      _eventadd(e) {
+        this.dispatchEvent(new CustomEvent('event-add', { detail: { date: e.detail.date } }));
+      }
+
+    }
+    window.customElements.define(PFcalendar.is, PFcalendar);
+  </script>
+</dom-module>

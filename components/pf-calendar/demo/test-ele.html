@@ -1,0 +1,82 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../pf-calendar.html">
+
+<!--
+`pf-calendar`
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="test-ele">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+        <h2>Hello [[prop1]]</h2>
+        <style is="custom-style">
+
+
+
+
+        #mycal {
+        --pf-calendar-selected-date-bg:red;
+        }
+        </style>
+
+        <pf-calendar id="mycal" databasename="pf-calendar-firebase"  databasepath="testdata" ></pf-calendar>
+    </template>
+
+    <script>
+        class TestEle extends Polymer.Element {
+            static get is() { return 'test-ele'; }
+            static get properties() {
+                return {
+                    prop1: {
+                        type: String,
+                        value: 'test-ele'
+                    },
+                    date: {
+                        type: Object
+                    },
+                    calendarstyle:{
+                        type:String
+                    }, eventsdata:{
+                        type:Object
+                    }
+
+                };
+            }
+            ready() {
+                super.ready();
+                this.$.mycal.addEventListener('date-select', e => this._date(e)
+            );
+                this.$.mycal.addEventListener('event-select', e => this._handleClick(e)
+            );
+                this.$.mycal.addEventListener('event-edit', e => this._handleEvent(e)
+            );
+                this.$.mycal.addEventListener('event-delete', e => this._handleEvent(e)
+            );
+                this.$.mycal.addEventListener('event-add', e => this._addEvent(e)
+            );
+            }
+            _addEvent(e) {
+                var event = e.detail.date
+            }
+            _date(e) {
+                var day = e.detail.date;
+                var eve = e.detail.events;
+            }
+            _handleClick(e) {
+                var eve = e.detail.event
+            }
+            _handleEvent(e){
+                var event = e.detail.event
+            }
+        }
+
+        window.customElements.define(TestEle.is, TestEle);
+    </script>
+</dom-module>

@@ -1,0 +1,39 @@
+{
+  "name": "pf-calendar",
+  "version": "0.1.0",
+  "description": "A composite Polymer 2.0 custom element to manipulate calendar (events, todo, appointments, meetings, reminders etc), data manipulated from Firebase. This element makes use of pf-calendar-events and pf-calendar-events-data element",
+  "main": "pf-calendar.html",
+  "repository": "PFElements/pf-calendar",
+  "keywords": [
+    "Polymer",
+    "Polymer 2.0",
+    "page",
+    "calendar",
+    "appoointment",
+    "todo",
+    "schedule",
+    "event",
+    "meetings",
+    "reminder",
+    "task",
+    "firebase",
+    "polymerfire"
+  ],
+  "authors": [
+    "Pixy Flux <info@pixyflux.com>"
+  ],
+  "homepage": "http://pixyflux.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PFElements/pf-calendar/issues"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
+    "web-component-tester": "^6.0.0-prerelease.7",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.5"
+  },
+  "scripts": {
+    "test": "wct"
+  }
+}
