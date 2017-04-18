@@ -1,11 +1,17 @@
 # pf-elements
 A Polymer 2.0 based collection of reusable web components 
 
+[![Join the chat at https://gitter.im/pf-elements/Lobby](https://badges.gitter.im/pf-elements/Lobby.svg)](https://gitter.im/pf-elements/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/owner/my-element)
 
 ## Demo
 [Click here for docs & demo](https://github.com/PFElements/pf-calendar/blob/master/demo/index.html)
 
+
+| Element Name | Latest Version (Bower) | Npm version  | Build Status |
+| [pf-calendar](https://github.com/PFElements/pf-calendar) | [![GitHub version](https://badge.fury.io/gh/PFElements%2Fpf-calendar.svg)](https://badge.fury.io/gh/PFElements%2Fpf-calendar) | [![npm version](https://badge.fury.io/js/pf-calendar.svg)](https://www.npmjs.com/package/pf-calendar) |[![Build Status](https://travis-ci.org/PFElements/pf-calendar.svg?branch=master)](https://travis-ci.org/PFElements/pf-calendar) | | [pf-calendar-event]|
 
 ## Install the Polymer-CLI
 
@@ -81,3 +87,33 @@ $ polymer test
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+
+## Learn more
+
+See the list of elements, demos, and documentation by browsing this collection on webcomponents.org:
+
+### [Go to webcomponents.org](https://www.webcomponents.org/collection/pfelements/pf-elements)
+
+---
+
+## Contributing
+
+Comments, questions, suggestions, issues, and pull requests are all welcome.
+
+### Get in touch with the team
+
+Joing us at [![Join the chat at https://gitter.im/pf-elements/Lobby](https://badges.gitter.im/pf-elements/Lobby.svg)](https://gitter.im/pf-elements/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+- [Twitter](https://twitter.com/)
+
+### Some ways to help:
+
+- **Test the elements and provide feedback**: We would love to hear your feedback on anything related to the elements, like features, API and design. The best way to start is by trying them out. And to get a quick response, either drop a question/comment on the chat or open an issue in GitHub.
+- **Report bugs**: File issues for the elements in their respective GitHub projects.
+- **Send pull requests**: If you want to contribute code, check out the development instructions below.
+
+We encourage you to read the [contribution instructions by GitHub](https://guides.github.com/activities/contributing-to-open-source/#contributing) also.
+
+## License
+
+MIT License
