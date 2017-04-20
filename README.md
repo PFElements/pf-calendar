@@ -17,6 +17,138 @@ A Polymer 2.0 based collection of reusable web components
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
 
+---
+# A composite component
+`<pf-calendar></pf-calendar>` makes use of two other components together to give you control over customizing the UI of the calendar and also to be able to customize the backend data for the calendar. To supply the data for the calendar this element makes use of Firebase as a backend. 
+
+For referrence please see both of our other custom elements
+`<pf-calendar-events></pf-calendar-events>` for the UI and `<pf-calendar-events-data></pf-calendar-events-data>` for manipulating the backend data in Firebase.
+
+# Customization and usage
+
+This custom element can be customized in a number of ways
+
+## Customization of look and feel
+
+By default you have two general options
+
+a. material-calendar
+
+b. classic-calendar
+
+Once you decide you general look and feel then you can further customize the details, e.g. if you chose a Material Design look and feel and you want to change the width, hight, color etc. you can do that with the provided API. 
+#### material Calendar Example
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="pf-calendar-events.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+
+
+
+
+ <pf-calendar-events
+                  calendarstyle="material-calendar"
+                  data='[
+                          { "eventName": "Lunch Meeting w/ Mark", "calendar": "Work", "color": "orange","date":"1491322091394" },
+                          { "eventName": "Giants vs Packers", "calendar": "sport", "color": "blue","date":"1499185140000" },
+                          { "eventName": "Soccer", "calendar": "sport", "color": "blue","date":"1491581940000" },
+                          { "eventName": "Public Holiday", "calendar": "holiday", "color": "green","date":"1494173940000" }]'
+          >
+
+          </pf-calendar-events>
+```
+#### Classic Calendar Example
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="pf-calendar-events.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+ <pf-calendar-events
+                  calendarstyle="classic-calendar"
+                  data='[
+                          { "eventName": "Lunch Meeting w/ Mark", "calendar": "Work", "color": "orange","date":"1491322091394" },
+                          { "eventName": "Giants vs Packers", "calendar": "sport", "color": "blue","date":"1499185140000" },
+                          { "eventName": "Soccer", "calendar": "sport", "color": "blue","date":"1491581940000" },
+                          { "eventName": "Public Holiday", "calendar": "holiday", "color": "green","date":"1494173940000" }]'
+          >
+
+          </pf-calendar-events>
+```
+default value of 'calendarstyle' is 'material-calendar'
+### Types of calendar
+You can define different types of calendar events (appointments, meetings, reminders, etc). e.g. you can define a "Sports" Calendar "Office Meeting" calendar, "Birthday Reminders" calendar. Distinct type of categories will appear in different colors.
+
+### CRUD operations
+
+Buttons / icons are provided to enable Adding, deleting or updating an event (meeting, reminder, appointment etc)
+Material based button and icons are provided to enable these operations.
+For firebase events data, please see our firebase element
+
+## Customization of Calendar Events/Data (your meetings, appointments, reminders etc)
+
+Of course if you cannot provide you own data then why even use a third party component, and you need events as well to notify you of the user interaction with the calendar
+
+This custom element provides you two generic ways that again can be further customized
+
+a. Data Through firebase custom element (Please see our firebase custom element that can be combined with this element to enable your data interaction from firebase
+
+b. By providing an array of data. (Calendar events, appointments, meetings, reminders etc.)
+
+### CRUD operations
+Our custom element provides a way to hook your CRUD operations into our calendar, it provides a number of API hooks/events to notify you about an operation that is performed on a certain event.
+
+
+Custom Event                     | Description                       
+---------------------------------|----------------------------------------
+`event-add`                      | Add event retuns current selected date ('e.detail.date'), fired when user press add event button  
+`event-edit`                     | Edit event retuns event ('e.detail.event'),fired when user press edit event button
+`event-delete`                   | Delete event retuns event ('e.detail.event'),fired when user press delete event button
+`event-select`                   | Event Select retuns event ('e.detail.event'),fired when user click on any event            
+`date-select`                    | Date Select retuns seleted date and events of date ('e.detail.date'and'e.detail.events'),fired when user click on any event             
+  
+
+
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="pf-calendar-events.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+
+
+
+
+ <pf-calendar-events
+                  data='[
+                          { "eventName": "Lunch Meeting w/ Mark", "calendar": "Work", "color": "orange","date":"1491322091394" },
+                          { "eventName": "Giants vs Packers", "calendar": "sport", "color": "blue","date":"1499185140000" },
+                          { "eventName": "Soccer", "calendar": "sport", "color": "blue","date":"1491581940000" },
+                          { "eventName": "Public Holiday", "calendar": "holiday", "color": "green","date":"1494173940000" }]'
+          >
+
+          </pf-calendar-events>
+```
 
 ### Styling
 The following custom properties and mixins are available for styling:
