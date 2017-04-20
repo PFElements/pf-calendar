@@ -7,7 +7,7 @@ A Polymer 2.0 based collection of reusable web components
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/owner/my-element)
 
 ## Demo
-[Click here for docs & demo](https://pfelements.github.io/pf-calendar-events/components/pf-calendar-events/demo/index.html)
+[Click here for docs & demo](https://www.webcomponents.org/element/PFElements/pf-calendar/demo/demo/index.html)
 
 | Element Name | Latest Version (Bower) | Npm version  | Build Status |
 |--------------|------------------------|--------------|--------------|
