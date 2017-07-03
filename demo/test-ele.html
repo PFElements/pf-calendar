@@ -1,4 +1,11 @@
 <link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../paper-dialog/paper-dialog.html">
+<link rel="import" href="../../paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../../paper-listbox/paper-listbox.html">
+<link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../paper-input/paper-input.html">
+<link rel="import" href="../../paper-button/paper-button.html">
+<link rel="import" href="../../paper-item/paper-item.html">
 <link rel="import" href="../pf-calendar.html">
 
 <!--
@@ -25,6 +32,29 @@
         </style>
 
         <pf-calendar id="mycal" databasename="pf-calendar-firebase"  databasepath="testdata" ></pf-calendar>
+        <paper-dialog class="content" id="eveDialog" >
+            <paper-input class="paperInput" id="EventName" label="Event Name" required auto-validate
+                          error-message="Enter Event Name" char-counter></paper-input>
+            <paper-input class="paperInput" id="EventDesc"  label="Event Description"
+                         value="" char-counter></paper-input>
+            <paper-input class="paperInput" id="EventCat"  label="Event Category"
+                         value="" char-counter></paper-input>
+            <paper-input class="paperInput" id="EventColor"  label="Event Color" required auto-validate
+                         value="" char-counter></paper-input>
+         <!--
+            <paper-dropdown-menu id="eventColor" label="Color" vertical-align="bottom"
+                                       horizontal-align="left">
+                <paper-listbox class="dropdown-content"  attr-for-selected="label">
+                    <paper-item label="blue">Blue</paper-item>
+                    <paper-item label="orange">Orange</paper-item>
+                    <paper-item label="green">Green</paper-item>
+                    <paper-item label="yellow">Yellow</paper-item>
+                </paper-listbox>
+            </paper-dropdown-menu>
+-->
+            <paper-button on-tap="_AddNewEvent" autofocus>Submit</paper-button>
+            <paper-button dialog-dismiss>Cancel</paper-button>
+        </paper-dialog>
     </template>
 
     <script>
@@ -61,7 +91,35 @@
             );
             }
             _addEvent(e) {
-                var event = e.detail.date
+                this.$.eveDialog.open()
+                var selectedDate = e.detail.date
+                this.date=moment(selectedDate).valueOf()
+            }
+            _AddNewEvent(){
+                var validation = true
+
+                if (!this.$.EventName.validate()) {
+                    validation = false
+                }
+                if (!this.$.EventCat.validate()) {
+                    validation = false
+                }
+                if (!this.$.EventColor.validate()) {
+                    validation = false
+                }
+
+                if (validation) {
+                    var mData = {
+                        eventName:this.$.EventName.value,
+                        category:this.$.EventCat.value,
+                        color:this.$.EventColor.value,
+                        date:this.date,
+                        description:this.$.EventDesc.value
+
+                    }
+                    this.$.mycal.addNewEvent(mData);
+                    this.$.eveDialog.close()
+                }
             }
             _date(e) {
                 var day = e.detail.date;

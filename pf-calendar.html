@@ -58,6 +58,7 @@ Custom property                         | Description                           
     </style>
 
     <pf-calendar-events-data
+            id="calEveData"
             databasename="[[databasename]]"
             databasepath="[[databasepath]]"
             data="{{data}}"
@@ -66,7 +67,7 @@ Custom property                         | Description                           
     <pf-calendar-events id="pfcalendar" data="[[data]]" calendarstyle="[[calendarstyle]]" data={{eventsdata}}
     ></pf-calendar-events>
   </template>
-
+  <script src="js/moment.min.js"></script>
   <script>
     class PFcalendar extends Polymer.Element {
       static get is() { return 'pf-calendar'; }
@@ -129,6 +130,9 @@ Custom property                         | Description                           
       }
       _eventadd(e) {
         this.dispatchEvent(new CustomEvent('event-add', { detail: { date: e.detail.date } }));
+      }
+      addNewEvent(event){
+          this.$.calEveData.addEvent(event)
       }
 
     }
