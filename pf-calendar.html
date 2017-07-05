@@ -134,6 +134,12 @@ Custom property                         | Description                           
       addNewEvent(event){
           this.$.calEveData.addEvent(event)
       }
+        updateEvent(key,event){
+            this.$.calEveData.updateEvent(key,event)
+        }
+        deleteEvent(key){
+            this.$.calEveData.deleteEvent(key)
+        }
 
     }
     window.customElements.define(PFcalendar.is, PFcalendar);

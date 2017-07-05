@@ -33,14 +33,14 @@
 
         <pf-calendar id="mycal" databasename="pf-calendar-firebase"  databasepath="testdata" ></pf-calendar>
         <paper-dialog class="content" id="eveDialog" >
-            <paper-input class="paperInput" id="EventName" label="Event Name" required auto-validate
-                          error-message="Enter Event Name" char-counter></paper-input>
+            <paper-input class="paperInput" id="EventName" label="Event Name" required
+                          error-message="Enter Event Name" char-counter ></paper-input>
             <paper-input class="paperInput" id="EventDesc"  label="Event Description"
                          value="" char-counter></paper-input>
             <paper-input class="paperInput" id="EventCat"  label="Event Category"
                          value="" char-counter></paper-input>
-            <paper-input class="paperInput" id="EventColor"  label="Event Color" required auto-validate
-                         value="" char-counter></paper-input>
+            <paper-input class="paperInput" id="EventColor"  label="Event Color" required
+                          char-counter></paper-input>
          <!--
             <paper-dropdown-menu id="eventColor" label="Color" vertical-align="bottom"
                                        horizontal-align="left">
@@ -53,6 +53,35 @@
             </paper-dropdown-menu>
 -->
             <paper-button on-tap="_AddNewEvent" autofocus>Submit</paper-button>
+            <paper-button dialog-dismiss>Cancel</paper-button>
+        </paper-dialog>
+        <paper-dialog class="content" id="editEventDialog" >
+            <paper-input class="paperInput" id="editEventName" label="Event Name" required auto-validate
+                         error-message="Enter Event Name" char-counter value="{{eventsdata.eventName}}"></paper-input>
+            <paper-input class="paperInput" id="editEventDesc"  label="Event Description"
+                          char-counter value="{{eventsdata.description }}"></paper-input>
+            <paper-input class="paperInput" id="editEventCat"  label="Event Category"
+                          char-counter value="{{eventsdata.category}}"
+            ></paper-input>
+            <paper-input class="paperInput" id="editEventColor"  label="Event Color" value="{{eventsdata.color}}" required auto-validate
+                          char-counter></paper-input>
+            <!--
+               <paper-dropdown-menu id="eventColor" label="Color" vertical-align="bottom"
+                                          horizontal-align="left">
+                   <paper-listbox class="dropdown-content"  attr-for-selected="label">
+                       <paper-item label="blue">Blue</paper-item>
+                       <paper-item label="orange">Orange</paper-item>
+                       <paper-item label="green">Green</paper-item>
+                       <paper-item label="yellow">Yellow</paper-item>
+                   </paper-listbox>
+               </paper-dropdown-menu>
+   -->
+            <paper-button on-tap="_updateEvent" autofocus>Update</paper-button>
+            <paper-button dialog-dismiss>Cancel</paper-button>
+        </paper-dialog>
+        <paper-dialog class="content" id="editEventDialog" >
+           <h3>The event will be deleted.</h3>
+            <paper-button on-tap="_deleteEvent" autofocus>Delete</paper-button>
             <paper-button dialog-dismiss>Cancel</paper-button>
         </paper-dialog>
     </template>
@@ -83,9 +112,9 @@
             );
                 this.$.mycal.addEventListener('event-select', e => this._handleClick(e)
             );
-                this.$.mycal.addEventListener('event-edit', e => this._handleEvent(e)
+                this.$.mycal.addEventListener('event-edit', e => this._editEvent(e)
             );
-                this.$.mycal.addEventListener('event-delete', e => this._handleEvent(e)
+                this.$.mycal.addEventListener('event-delete', e => this._handleDeletelistner(e)
             );
                 this.$.mycal.addEventListener('event-add', e => this._addEvent(e)
             );
@@ -97,7 +126,6 @@
             }
             _AddNewEvent(){
                 var validation = true
-
                 if (!this.$.EventName.validate()) {
                     validation = false
                 }
@@ -120,6 +148,49 @@
                     this.$.mycal.addNewEvent(mData);
                     this.$.eveDialog.close()
                 }
+            }
+
+            _editEvent(e){
+
+                this.eventsdata=""
+                this.eventsdata = e.detail.event
+                this.date=moment(this.eventsdata.date).valueOf()
+                this.$.editEventDialog.open();
+
+            }
+            _updateEvent(){
+                var validation = true
+                if (!this.$.editEventName.validate()) {
+                    validation = false
+                }
+                if (!this.$.editEventCat.validate()) {
+                    validation = false
+                }
+                if (!this.$.editEventColor.validate()) {
+                    validation = false
+                }
+
+                if (validation) {
+                    var mData = {
+                        eventName:this.$.editEventName.value,
+                        category:this.$.editEventCat.value,
+                        color:this.$.editEventColor.value,
+                        date:this.date,
+                        description:this.$.editEventDesc.value
+
+                    }
+                    this.$.mycal.updateEvent(this.eventsdata.$key,mData);
+                    this.$.editEventDialog.close()
+                }
+            }
+            _handleDeletelistner(e){
+                this.eventsdata=""
+                this.$.editEventDialog.open()
+                this.eventsdata = e.detail.event
+            }
+            _deleteEvent(){
+                this.$.mycal.deleteEvent(this.eventsdata.$key);
+                this.$.editEventDialog.close()
             }
             _date(e) {
                 var day = e.detail.date;
