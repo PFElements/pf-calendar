@@ -2,7 +2,7 @@
   "name": "pf-calendar",
   "main": "pf-calendar.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0-rc.2",
+    "polymer": "polymer/polymer#^2.0.2",
     "pf-calendar-events": "PFElements/pf-calendar-events",
     "pf-calendar-events-data": "PFElements/pf-calendar-events-data",
     "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
@@ -10,29 +10,39 @@
     "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#^2.1.0",
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^2.0.0",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
-    "paper-item": "PolymerElements/paper-item#^2.0.0"
+    "paper-item": "PolymerElements/paper-item#^2.0.0",
+    "paper-button": "polymerElements/paper-button#^2.0.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
-    "web-component-tester": "v6.0.0-prerelease.5",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.5"
+    "iron-component-page": "PolymerElements/iron-component-page",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
+    "web-component-tester": "v6",
+    "webcomponentsjs": "webcomponents/webcomponentsjs"
   },
   "resolutions": {
     "polymer": "^2.0.0-rc.2",
-    "iron-resizable-behavior": "2.0-preview",
-    "iron-a11y-keys-behavior": "2.0-preview",
-    "iron-meta": "2.0-preview",
-    "iron-flex-layout": "2.0-preview",
-    "iron-selector": "2.0-preview",
-    "paper-styles": "2.0-preview",
-    "iron-behaviors": "2.0-preview",
-    "iron-validatable-behavior": "2.0-preview",
-    "iron-form-element-behavior": "2.0-preview",
-    "paper-behaviors": "2.0-preview",
-    "iron-checked-element-behavior": "2.0-preview",
-    "paper-ripple": "2.0-preview",
-    "iron-icon": "2.0-preview",
-    "iron-iconset-svg": "2.0-preview"
+    "iron-flex-layout": "1 - 2",
+    "iron-meta": "1 - 2",
+    "iron-behaviors": "1 - 2",
+    "iron-a11y-keys-behavior": "1 - 2",
+    "iron-checked-element-behavior": "1 - 2",
+    "iron-validatable-behavior": "1 - 2",
+    "iron-form-element-behavior": "1 - 2",
+    "paper-ripple": "1 - 2",
+    "app-layout": "1 - 2",
+    "iron-media-query": "1 - 2",
+    "iron-resizable-behavior": "1 - 2",
+    "iron-scroll-target-behavior": "1 - 2",
+    "iron-ajax": "1 - 2",
+    "iron-doc-viewer": "^3.0.0",
+    "marked-element": "1 - 2",
+    "paper-behaviors": "1 - 2",
+    "prism-element": "1 - 2",
+    "iron-icons": "1 - 2",
+    "iron-icon": "1 - 2",
+    "iron-iconset-svg": "1 - 2",
+    "paper-styles": "1 - 2",
+    "iron-location": "1 - 2",
+    "test-fixture": "^2.0.0"
   }
 }

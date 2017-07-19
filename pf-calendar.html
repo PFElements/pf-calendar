@@ -92,79 +92,79 @@ Methods                                 | Description
   </template>
   <script src="js/moment.min.js"></script>
   <script>
-    class PFcalendar extends Polymer.Element {
-      static get is() { return 'pf-calendar'; }
-      static get properties() {
-        return {
-          prop1: {
-            type: String,
-            value: 'pf-calendar'
-          },
-          date: {
-            type: Object
-          },
-          calendarstyle:{
-            type:String
-          },
-          evedata:{
-            type:Object,
-            notify:true
-          },
-          databasename:{
-            type:String
-          },
-        databasepath: {
-          type:String
-        },
-          filterAttr:{
-            type:String
-        },
-        filterValue:{
-          type:String
-        }
+      class PFcalendar extends Polymer.Element {
+          static get is() { return 'pf-calendar'; }
+          static get properties() {
+              return {
+                  prop1: {
+                      type: String,
+                      value: 'pf-calendar'
+                  },
+                  date: {
+                      type: Object
+                  },
+                  calendarstyle:{
+                      type:String
+                  },
+                  evedata:{
+                      type:Object,
+                      notify:true
+                  },
+                  databasename:{
+                      type:String
+                  },
+                  databasepath: {
+                      type:String
+                  },
+                  filterAttr:{
+                      type:String
+                  },
+                  filterValue:{
+                      type:String
+                  }
 
-        };
-      }
-      ready() {
-        super.ready();
-        this.$.pfcalendar.addEventListener('date-select', e => this._dateselect(e)
-      );
-        this.$.pfcalendar.addEventListener('event-select', e => this._eventselect(e)
-      );
-        this.$.pfcalendar.addEventListener('event-edit', e => this._eventedit(e)
-      );
-        this.$.pfcalendar.addEventListener('event-delete', e => this._eventdelete(e)
-      );
-        this.$.pfcalendar.addEventListener('event-add', e => this._eventadd(e)
-      );
-      }
-      _dateselect(e) {
+              };
+          }
+          ready() {
+              super.ready();
+              this.$.pfcalendar.addEventListener('date-select', e => this._dateselect(e)
+          );
+              this.$.pfcalendar.addEventListener('event-select', e => this._eventselect(e)
+          );
+              this.$.pfcalendar.addEventListener('event-edit', e => this._eventedit(e)
+          );
+              this.$.pfcalendar.addEventListener('event-delete', e => this._eventdelete(e)
+          );
+              this.$.pfcalendar.addEventListener('event-add', e => this._eventadd(e)
+          );
+          }
+          _dateselect(e) {
 
-        this.dispatchEvent(new CustomEvent('date-select', { detail: { date: e.detail.date, events: e.detail.events} }));
-      }
-      _eventselect(e) {
-        this.dispatchEvent(new CustomEvent('event-select', { detail: { event: e.detail.event } }));
-      }
-      _eventedit(e) {
-        this.dispatchEvent(new CustomEvent('event-edit', { detail: { event: e.detail.event } }));
-      }
-      _eventdelete(e) {
-        this.dispatchEvent(new CustomEvent('event-delete', { detail: { event: e.detail.event } }));
-      }
-      _eventadd(e) {
-        this.dispatchEvent(new CustomEvent('event-add', { detail: { date: e.detail.date } }));
-      }
-      addNewEvent(event){
-          this.$.calEveData.addEvent(event)
-      }
-        updateEvent(key,event){
-            this.$.calEveData.updateEvent(key,event)
-        }
-        deleteEvent(key){
-            this.$.calEveData.deleteEvent(key)
-        }
+              this.dispatchEvent(new CustomEvent('date-select', { detail: { date: e.detail.date, events: e.detail.events} }));
+          }
+          _eventselect(e) {
+              this.dispatchEvent(new CustomEvent('event-select', { detail: { event: e.detail.event } }));
+          }
+          _eventedit(e) {
+              this.dispatchEvent(new CustomEvent('event-edit', { detail: { event: e.detail.event } }));
+          }
+          _eventdelete(e) {
+              this.dispatchEvent(new CustomEvent('event-delete', { detail: { event: e.detail.event } }));
+          }
+          _eventadd(e) {
+              this.dispatchEvent(new CustomEvent('event-add', { detail: { date: e.detail.date } }));
+          }
+          addNewEvent(event){
+              this.$.calEveData.addEvent(event)
+          }
+          updateEvent(key,event){
+              this.$.calEveData.updateEvent(key,event)
+          }
+          deleteEvent(key){
+              this.$.calEveData.deleteEvent(key)
+          }
 
-    }
-    window.customElements.define(PFcalendar.is, PFcalendar);
+      }
+      window.customElements.define(PFcalendar.is, PFcalendar);
   </script>
 </dom-module>

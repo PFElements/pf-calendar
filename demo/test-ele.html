@@ -34,24 +34,24 @@
         <pf-calendar id="mycal" databasename="pf-calendar-firebase"  databasepath="testdata" ></pf-calendar>
         <paper-dialog class="content" id="eveDialog" >
             <paper-input class="paperInput" id="EventName" label="Event Name" required
-                          error-message="Enter Event Name" char-counter ></paper-input>
+                         error-message="Enter Event Name" char-counter ></paper-input>
             <paper-input class="paperInput" id="EventDesc"  label="Event Description"
                          value="" char-counter></paper-input>
             <paper-input class="paperInput" id="EventCat"  label="Event Category"
                          value="" char-counter></paper-input>
             <paper-input class="paperInput" id="EventColor"  label="Event Color" required
-                          char-counter></paper-input>
-         <!--
-            <paper-dropdown-menu id="eventColor" label="Color" vertical-align="bottom"
-                                       horizontal-align="left">
-                <paper-listbox class="dropdown-content"  attr-for-selected="label">
-                    <paper-item label="blue">Blue</paper-item>
-                    <paper-item label="orange">Orange</paper-item>
-                    <paper-item label="green">Green</paper-item>
-                    <paper-item label="yellow">Yellow</paper-item>
-                </paper-listbox>
-            </paper-dropdown-menu>
--->
+                         char-counter></paper-input>
+            <!--
+               <paper-dropdown-menu id="eventColor" label="Color" vertical-align="bottom"
+                                          horizontal-align="left">
+                   <paper-listbox class="dropdown-content"  attr-for-selected="label">
+                       <paper-item label="blue">Blue</paper-item>
+                       <paper-item label="orange">Orange</paper-item>
+                       <paper-item label="green">Green</paper-item>
+                       <paper-item label="yellow">Yellow</paper-item>
+                   </paper-listbox>
+               </paper-dropdown-menu>
+   -->
             <paper-button on-tap="_AddNewEvent" autofocus>Submit</paper-button>
             <paper-button dialog-dismiss>Cancel</paper-button>
         </paper-dialog>
@@ -59,12 +59,12 @@
             <paper-input class="paperInput" id="editEventName" label="Event Name" required auto-validate
                          error-message="Enter Event Name" char-counter value="{{eventsdata.eventName}}"></paper-input>
             <paper-input class="paperInput" id="editEventDesc"  label="Event Description"
-                          char-counter value="{{eventsdata.description }}"></paper-input>
+                         char-counter value="{{eventsdata.description }}"></paper-input>
             <paper-input class="paperInput" id="editEventCat"  label="Event Category"
-                          char-counter value="{{eventsdata.category}}"
+                         char-counter value="{{eventsdata.category}}"
             ></paper-input>
             <paper-input class="paperInput" id="editEventColor"  label="Event Color" value="{{eventsdata.color}}" required auto-validate
-                          char-counter></paper-input>
+                         char-counter></paper-input>
             <!--
                <paper-dropdown-menu id="eventColor" label="Color" vertical-align="bottom"
                                           horizontal-align="left">
@@ -79,8 +79,8 @@
             <paper-button on-tap="_updateEvent" autofocus>Update</paper-button>
             <paper-button dialog-dismiss>Cancel</paper-button>
         </paper-dialog>
-        <paper-dialog class="content" id="editEventDialog" >
-           <h3>The event will be deleted.</h3>
+        <paper-dialog class="content" id="deleteEventDialog" >
+            <h3>The event will be deleted.</h3>
             <paper-button on-tap="_deleteEvent" autofocus>Delete</paper-button>
             <paper-button dialog-dismiss>Cancel</paper-button>
         </paper-dialog>
@@ -185,12 +185,12 @@
             }
             _handleDeletelistner(e){
                 this.eventsdata=""
-                this.$.editEventDialog.open()
+                this.$.deleteEventDialog.open()
                 this.eventsdata = e.detail.event
             }
             _deleteEvent(){
                 this.$.mycal.deleteEvent(this.eventsdata.$key);
-                this.$.editEventDialog.close()
+                this.$.deleteEventDialog.close()
             }
             _date(e) {
                 var day = e.detail.date;
