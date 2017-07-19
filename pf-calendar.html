@@ -37,6 +37,29 @@ Custom property                         | Description                           
 `--pf-calendar-editbutton-disply`       |  to hide button set "none"              |inline
 `--pf-calendar-legend-bg`               |  Background color of legend bar         | rgba(60, 60, 60, 1)
 
+### CRUD operations
+Our custom element provides a way to hook your CRUD operations into our calendar, it provides a number of API hooks/events to notify you about an operation that is performed on a certain event.
+
+
+Custom Event                     | Description
+---------------------------------|----------------------------------------
+`event-add`                      | Add event retuns current selected date ('e.detail.date'), fired when user press add event button
+`event-edit`                     | Edit event retuns event ('e.detail.event'),fired when user press edit event button
+`event-delete`                   | Delete event retuns event ('e.detail.event'),fired when user press delete event button
+`event-select`                   | Event Select retuns event ('e.detail.event'),fired when user click on any event
+`date-select`                    | Date Select retuns seleted date and events of date ('e.detail.date'and'e.detail.events'),fired when user click on any event
+
+
+### Methods
+The following methods are available for crude events operation:
+
+Methods                                 | Description
+----------------------------------------|--------------------------
+`addNewEvent(event)`                    |  Take event object and add as a into firebase
+`updateEvent(key,event)`                |  Take firebase data ref key and updated event object , update the given ref key node
+`deleteEvent(key)`                      |  Take record ref key and delete that event
+
+
 `pf-calendar`
 
 

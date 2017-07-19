@@ -122,6 +122,15 @@ Custom Event                     | Description
 `date-select`                    | Date Select retuns seleted date and events of date ('e.detail.date'and'e.detail.events'),fired when user click on any event             
   
 
+### Methods
+The following methods are available for crude events operation:
+
+Methods                                 | Description                           
+----------------------------------------|--------------------------
+`addNewEvent(event)`                       |  Take event object and add as a into firebase 
+`updateEvent(key,event)`                |  Take firebase data ref key and updated event object , update the given ref key node                          
+`deleteEvent(key)`                      |  Take record ref key and delete that event                    
+            
 
 <!---
 ```
