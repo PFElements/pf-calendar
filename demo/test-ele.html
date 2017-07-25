@@ -53,6 +53,14 @@
             height: 35px;
         }
 
+        .update-button{
+            background-color: #009688;
+            color: white;
+            margin-left: 32px;
+            margin-top: 28px;
+            height: 35px;
+        }
+
 
         </style>
 
@@ -110,8 +118,8 @@
                    </paper-listbox>
                </paper-dropdown-menu>
    -->
-            <paper-button on-tap="_updateEvent" autofocus>Update</paper-button>
-            <paper-button dialog-dismiss>Cancel</paper-button>
+            <paper-button raised class="update-button" on-tap="_updateEvent" autofocus>Update</paper-button>
+            <paper-button raised class="cancel-button" dialog-dismiss>Cancel</paper-button>
         </paper-dialog>
         <paper-dialog class="content" id="deleteEventDialog">
             <h3>The event will be deleted.</h3>
