@@ -12,7 +12,12 @@
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-item": "PolymerElements/paper-item#^2.0.0",
     "paper-button": "polymerElements/paper-button#^2.0.0",
-    "l2t-paper-color": "Link2Twenty/l2t-paper-color#^0.1.1"
+    "paper-slider": "polymerElements/paper-slider#^2.0.2",
+    "paper-radio-group": "polymerElements/paper-radio-group#^2.0.0",
+    "iron-icons": "polymerElements/iron-icons#^2.0.1",
+    "paper-behaviors": "polymerElements/paper-behaviors#^2.0.0",
+    "paper-styles": "polymerElements/paper-styles#^2.0.0",
+    "iron-flex-layout": "polymerElements/iron-flex-layout#^2.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page",
