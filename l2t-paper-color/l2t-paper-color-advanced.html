@@ -1,0 +1,163 @@
+<link rel="import" href="../../polymer/polymer-element.html">
+<link rel="import" href="../../paper-slider/paper-slider.html">
+
+<!--
+l2t-paper-color-advanced uses `paper-slider`'s to set RGB values
+
+### Example:
+
+    <l2t-paper-color-advanced></l2t-paper-color-advanced>
+    <l2t-paper-color-radio color="#00bcd4"></l2t-paper-color-radio>
+
+### Styling
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--l2t-paper-color-advanced-prev-height` | Height of the preview panel | `200px`
+`--l2t-paper-color-advanced-prev-width` | Width of the preview panel | `200px`
+`--l2t-paper-color-advanced-red` | Color to be used for red slider | `--paper-red-700`
+`--l2t-paper-color-advanced-green` | Color to be used for green slider | `--paper-green-700`
+`--l2t-paper-color-advanced-blue` | Color to be used for blue slider | `--paper-blue-700`
+
+@group l2t Paper Elements
+@element l2t-paper-color-advanced
+@demo demo/index.html
+-->
+
+<dom-module id="l2t-paper-color-advanced">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .preview {
+        height: var(--l2t-paper-color-advanced-prev-height, 200px);
+        width: var(--l2t-paper-color-advanced-prev-width, 200px);
+      }
+      .sliders {
+        display: flex;
+        width: var(--l2t-paper-color-advanced-prev-width, 200px);
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .red {
+        --paper-slider-active-color: var(--l2t-paper-color-advanced-red, var(--paper-red-700));
+        --paper-slider-knob-color: var(--l2t-paper-color-advanced-red, var(--paper-red-700));
+        --paper-slider-pin-color: var(--l2t-paper-color-advanced-red, var(--paper-red-700));
+      }
+      .green {
+        --paper-slider-active-color: var(--l2t-paper-color-advanced-green, var(--paper-green-700));
+        --paper-slider-knob-color: var(--l2t-paper-color-advanced-green, var(--paper-green-700));
+        --paper-slider-pin-color: var(--l2t-paper-color-advanced-green, var(--paper-green-700));
+      }
+      .blue {
+        --paper-slider-active-color: var(--l2t-paper-color-advanced-blue, var(--paper-blue-700));
+        --paper-slider-knob-color: var(--l2t-paper-color-advanced-blue, var(--paper-blue-700));
+        --paper-slider-pin-color: var(--l2t-paper-color-advanced-blue, var(--paper-blue-700));
+      }
+    </style>
+    <div class="container">
+      <div style="background:[[color]];" class="preview"></div>
+      <div class="sliders">
+        <paper-slider pin min="0" max="255"
+          immediate-value="{{redVal}}" value="[[redVal]]" class="red">
+        </paper-slider>
+        <paper-slider pin min="0" max="255"
+          immediate-value="{{greenVal}}" value="[[greenVal]]" class="green">
+        </paper-slider>
+        <paper-slider pin min="0" max="255"
+          immediate-value="{{blueVal}}" value="[[blueVal]]" class="blue">
+        </paper-slider>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class L2tPaperColorAdvanced extends Polymer.Element {
+      static get is() { return 'l2t-paper-color-advanced'; }
+      static get properties() {
+        return {
+          /**
+          * color: string to store hex color value
+          */
+          color: {
+            type: String,
+            notify: true
+          },
+          /**
+          * rgbColor: string to store RGB color value
+          */
+          rgbColor: {
+            type: String,
+            computed: '_rgbFromColor(color)',
+            observer: '_rgbToSliders'
+          },
+          /**
+          * redVal: number to store red color value
+          */
+          redVal: {
+            type: Number,
+            observer: '_colorChanged'
+          },
+          /**
+          * greenVal: number to store green color value
+          */
+          greenVal: {
+            type: Number,
+            observer: '_colorChanged'
+          },
+          /**
+          * blueVal: number to store blue color value
+          */
+          blueVal: {
+            type: Number,
+            observer: '_colorChanged'
+          }
+        };
+      }
+      /**
+      * _colorChanged: updates color when sliders move
+      */
+      _colorChanged() {
+        if(this.redVal === '' || this.greenVal === '' || this.blueVal === '')
+          return
+
+        var r = this.redVal.toString(16);
+        r=r.length<2?"0"+r:r;
+        var g = this.greenVal.toString(16);
+        g=g.length<2?"0"+g:g;
+        var b = this.blueVal.toString(16);
+        b=b.length<2?"0"+b:b;
+
+        this.color = "#"+r+g+b;
+      }
+      /**
+      * _rgbFromColor(color): updates rgbColor based on color
+      */
+      _rgbFromColor(color) {
+        var convertColor = document.createElement("div");
+        convertColor.style.color = color;
+        return convertColor.style.color;
+      }
+      /**
+      * _rgbToSliders: splits rgbColor into numeric values
+      */
+      _rgbToSliders() {
+        var split = this.rgbColor.slice(this.rgbColor.indexOf('(') + 1, this.rgbColor.indexOf(')'));
+        var splitArr = split.split(',');
+        this.redVal = parseInt(splitArr[0]);
+        this.greenVal = parseInt(splitArr[1]);
+        this.blueVal = parseInt(splitArr[2]);
+      }
+    }
+
+    window.customElements.define(L2tPaperColorAdvanced.is, L2tPaperColorAdvanced);
+  </script>
+</dom-module>

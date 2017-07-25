@@ -1,0 +1,235 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../paper-behaviors/paper-checked-element-behavior.html">
+<link rel="import" href="../../paper-styles/default-theme.html">
+<link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../iron-icons/iron-icons.html">
+
+<!--
+Material design: [Radio button](https://www.google.com/design/spec/components/selection-controls.html#selection-controls-radio-button)
+`l2t-paper-color-radio` is a button that can be either checked or unchecked.
+User can tap the radio button to check or uncheck it.
+
+Use a `<paper-radio-group>` to group a set of radio buttons.  When radio buttons
+are inside a radio group, exactly one radio button in the group can be checked
+at any time.
+
+Example:
+
+    <l2t-paper-color-radio></l2t-paper-color-radio>
+    <l2t-paper-color-radio>Item label</l2t-paper-color-radio>
+    
+### Styling
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--l2t-paper-color-radio-color` | Radio button background color (this is modified by _colorUpdate) | `--primary-color`
+`--l2t-paper-color-radio-ink-color` | Selected/focus ripple color (this is modified by _colorUpdate) | `--primary-color`
+`--l2t-paper-color-radio-size` | Size of the radio button | `48px`
+`--l2t-paper-color-radio-ink-size` | Size of the ripple (calculated when attached) | `76.8px`
+`--l2t-paper-color-radio-label-color` | Label color | `--primary-text-color`
+`--l2t-paper-color-radio-label-spacing` | Spacing between the label and the button | `10px`
+`--l2t-paper-color-icon-color` | Color of the checked icon | `#FFF`
+`--l2t-paper-color-radio-container` | A mixin applied to the internal radio container | `{}`
+`--l2t-paper-color-radio-label` | A mixin applied to the internal label | `{}`
+`--l2t-paper-color-radio-label-checked` | A mixin applied to the internal label when the radio button is checked | `{}`
+This element applies the mixin `--paper-font-common-base` but does not import `paper-styles/typography.html`.
+In order to apply the `Roboto` font to this element, make sure you've imported `paper-styles/typography.html`.
+@group l2t Paper Elements
+@element l2t-paper-color-radio
+@demo demo/index.html
+-->
+
+<dom-module id="l2t-paper-color-radio">
+  <template strip-whitespace>
+    <style>
+      :host {
+        display: inline-block;
+        line-height: 0;
+        white-space: nowrap;
+        cursor: pointer;
+        @apply --paper-font-common-base;
+        --calculated-l2t-paper-color-radio-size: var(--l2t-paper-color-radio-size, 48px);
+        --calculated-l2t-paper-color-icon-size: calc(var(--calculated-l2t-paper-color-radio-size)/2);
+        /* -1px is a sentinel for the default and is replace in `attached`. */
+        --calculated-l2t-paper-color-radio-ink-size: var(--l2t-paper-color-radio-ink-size, -1px);
+      }
+      :host(:focus) {
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      #radioContainer {
+        @apply --layout-inline;
+        @apply --layout-center-center;
+        position: relative;
+        width: var(--calculated-l2t-paper-color-radio-size);
+        height: var(--calculated-l2t-paper-color-radio-size);
+        vertical-align: middle;
+
+        @apply --l2t-paper-color-radio-container;
+      }
+      #ink {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: auto;
+        width: var(--calculated-l2t-paper-color-radio-ink-size);
+        height: var(--calculated-l2t-paper-color-radio-ink-size);
+        color: var(--l2t-paper-color-radio-ink-color, var(--primary-text-color));
+        opacity: 0.6;
+        pointer-events: none;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+      #offRadio, #onRadio {
+        position: absolute;
+        box-sizing: border-box;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+      #offRadio {
+        background: var(--l2t-paper-color-radio-color, var(--primary-color));
+      }
+      #onRadio {
+        --iron-icon-fill-color: var(--l2t-paper-color-icon-color, #FFF);
+        --iron-icon-height: var(--calculated-l2t-paper-color-icon-size);
+        --iron-icon-width: var(--calculated-l2t-paper-color-icon-size);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0,0,0,.3);
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        transition: -webkit-transform ease 0.28s;
+        transition: transform ease 0.28s;
+        will-change: transform;
+      }
+      :host([checked]) #onRadio {
+        -webkit-transform: scale(0.7);
+        transform: scale(0.7);
+      }
+      #radioLabel {
+        line-height: normal;
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: var(--l2t-paper-color-radio-label-spacing, 0px);
+        white-space: normal;
+        color: var(--l2t-paper-color-radio-label-color, var(--primary-text-color));
+        @apply --l2t-paper-color-radio-label;
+      }
+      :host([checked]) #radioLabel {
+        @apply --l2t-paper-color-radio-label-checked;
+      }
+      :host-context([dir="rtl"]) #radioLabel {
+        margin-left: 0;
+        margin-right: var(--l2t-paper-color-radio-label-spacing, 0px);
+      }
+      #radioLabel[hidden] {
+        display: none;
+      }
+    </style>
+
+    <div id="radioContainer">
+      <div id="offRadio"></div>
+      <div id="onRadio"><iron-icon icon="[[icon]]"></iron-icon>
+      </div>
+    </div>
+
+    <div id="radioLabel"><slot></slot></div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'l2t-paper-color-radio',
+      behaviors: [
+        Polymer.PaperCheckedElementBehavior
+      ],
+      hostAttributes: {
+        role: 'radio',
+        'aria-checked': false,
+        tabindex: 0
+      },
+      properties: {
+        /**
+         * Fired when the checked state changes due to user interaction.
+         *
+         * @event change
+         */
+        /**
+         * Fired when the checked state changes.
+         *
+         * @event iron-change
+         */
+        ariaActiveAttribute: {
+          type: String,
+          value: 'aria-checked'
+        },
+        /**
+        * color: string to store the color value
+        */
+        color: {
+          type: String,
+          value: '#3f51b5',
+          reflectToAttribute: true,
+          observer: '_colorUpdate'
+        },
+        /**
+        * icon: string to store iron-icon name for the check symbol
+        */
+        icon: {
+          type: String,
+          value: 'check'
+        }
+      },
+      /**
+      * _colorUpdate: updates styles to match color
+      */
+      _colorUpdate: function() {
+        if(this._testColor()){
+          this.updateStyles({
+            '--l2t-paper-color-radio-ink-color': this.color,
+            '--l2t-paper-color-radio-color': this.color,
+          });
+        } else {
+          console.warn("l2t-paper-color-radio: "+this.color+" is not a valid color, using default");
+          this.color = "#3f51b5";
+        }
+      },
+      /**
+      * _testColor: returns true if this.color is valid
+      */
+      _testColor: function() {
+        var testDiv = document.createElement("div");
+        testDiv.style.color = this.color;
+        return testDiv.style.color != '';
+      },
+      ready: function() {
+        this._rippleContainer = this.$.radioContainer;
+      },
+      attached: function() {
+        // Wait until styles have resolved to check for the default sentinel.
+        // See polymer#4009 for more details.
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          var inkSize = this.getComputedStyleValue('--calculated-l2t-paper-color-radio-ink-size').trim();
+          // If unset, compute and set the default `--l2t-paper-color-radio-ink-size`.
+          if (inkSize === '-1px') {
+            var size = parseFloat(this.getComputedStyleValue('--calculated-l2t-paper-color-radio-size').trim());
+            var defaultInkSize = Math.floor(1.6 * size);
+            // The button and ripple need to have the same parity so that their
+            // centers align.
+            if (defaultInkSize % 2 !== size % 2) {
+              defaultInkSize++;
+            }
+            this.updateStyles({
+              '--l2t-paper-color-radio-ink-size': defaultInkSize + 'px',
+            });
+          }
+        });
+      },
+    })
+  </script>
+</dom-module>
