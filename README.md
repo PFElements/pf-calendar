@@ -1,5 +1,5 @@
 # pf-elements
-A Polymer 2.0 based collection of reusable web components 
+A Polymer 2.0 based collection of reusable web components. 
 
 [![Join the chat at https://gitter.im/pf-elements/Lobby](https://badges.gitter.im/pf-elements/Lobby.svg)](https://gitter.im/pf-elements/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
