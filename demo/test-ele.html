@@ -6,6 +6,8 @@
 <link rel="import" href="../../paper-input/paper-input.html">
 <link rel="import" href="../../paper-button/paper-button.html">
 <link rel="import" href="../../paper-item/paper-item.html">
+<link rel="import" href="../../iron-icons/iron-icons.html">
+<link rel="import" href="../l2t-paper-color/l2t-paper-color.html">
 <link rel="import" href="../pf-calendar.html">
 
 <!--
@@ -21,15 +23,50 @@
             :host {
                 display: block;
             }
+
+
         </style>
 
         <style is="custom-style">
 
 
+        #EventColor{
+            width:82.5%;
+        }
 
+        #editEventColor{
+            width:82%;
+        }
+
+        .submit-button{
+            background-color: #009688;
+            color: white;
+            margin-left: 22px;
+            margin-top: 28px;
+            height: 35px;
+        }
+
+        .cancel-button{
+            background-color: #009688;
+            color: white;
+            margin-left: 5px;
+            margin-top: 28px;
+            height: 35px;
+        }
+
+        .update-button{
+            background-color: #009688;
+            color: white;
+            margin-left: 32px;
+            margin-top: 28px;
+            height: 35px;
+        }
 
 
         </style>
+
+
+        <body>
 
         <pf-calendar id="mycal" databasename="pf-calendar-firebase"  databasepath="testdata" ></pf-calendar>
         <paper-dialog class="content" id="eveDialog" >
@@ -39,8 +76,11 @@
                          value="" char-counter></paper-input>
             <paper-input class="paperInput" id="EventCat"  label="Event Category"
                          value="" char-counter></paper-input>
-            <paper-input class="paperInput" id="EventColor"  label="Event Color" required
-                         char-counter></paper-input>
+
+            <l2t-paper-color id="EventColor"></l2t-paper-color>
+
+            <!--<paper-input class="paperInput" id="EventColor"  label="Event Color" required-->
+                         <!--char-counter></paper-input>-->
             <!--
                <paper-dropdown-menu id="eventColor" label="Color" vertical-align="bottom"
                                           horizontal-align="left">
@@ -52,10 +92,10 @@
                    </paper-listbox>
                </paper-dropdown-menu>
    -->
-            <paper-button on-tap="_AddNewEvent" autofocus>Submit</paper-button>
-            <paper-button dialog-dismiss>Cancel</paper-button>
+            <paper-button raised class="submit-button" on-tap="_AddNewEvent" autofocus>Submit</paper-button>
+            <paper-button raised class="cancel-button" dialog-dismiss>Cancel</paper-button>
         </paper-dialog>
-        <paper-dialog class="content" id="editEventDialog" >
+        <paper-dialog class="content" id="editEventDialog">
             <paper-input class="paperInput" id="editEventName" label="Event Name" required auto-validate
                          error-message="Enter Event Name" char-counter value="{{eventsdata.eventName}}"></paper-input>
             <paper-input class="paperInput" id="editEventDesc"  label="Event Description"
@@ -63,8 +103,15 @@
             <paper-input class="paperInput" id="editEventCat"  label="Event Category"
                          char-counter value="{{eventsdata.category}}"
             ></paper-input>
-            <paper-input class="paperInput" id="editEventColor"  label="Event Color" value="{{eventsdata.color}}" required auto-validate
-                         char-counter></paper-input>
+
+            <l2t-paper-color id="editEventColor" value="{{eventsdata.color}}"></l2t-paper-color>
+
+
+
+
+
+            <!--<paper-input class="paperInput" id="editEventColor"  label="Event Color" value="{{eventsdata.color}}" required auto-validate-->
+                         <!--char-counter></paper-input>-->
             <!--
                <paper-dropdown-menu id="eventColor" label="Color" vertical-align="bottom"
                                           horizontal-align="left">
@@ -76,19 +123,21 @@
                    </paper-listbox>
                </paper-dropdown-menu>
    -->
-            <paper-button on-tap="_updateEvent" autofocus>Update</paper-button>
-            <paper-button dialog-dismiss>Cancel</paper-button>
+            <paper-button raised class="update-button" on-tap="_updateEvent" autofocus>Update</paper-button>
+            <paper-button raised class="cancel-button" dialog-dismiss>Cancel</paper-button>
         </paper-dialog>
-        <paper-dialog class="content" id="deleteEventDialog" >
+        <paper-dialog class="content" id="deleteEventDialog">
             <h3>The event will be deleted.</h3>
             <paper-button on-tap="_deleteEvent" autofocus>Delete</paper-button>
             <paper-button dialog-dismiss>Cancel</paper-button>
         </paper-dialog>
+        </body>
     </template>
 
     <script>
         class TestEle extends Polymer.Element {
             static get is() { return 'test-ele'; }
+
             static get properties() {
                 return {
                     prop1: {
@@ -103,11 +152,12 @@
                     }, eventsdata:{
                         type:Object
                     }
-
                 };
             }
+
             ready() {
                 super.ready();
+
                 this.$.mycal.addEventListener('date-select', e => this._date(e)
             );
                 this.$.mycal.addEventListener('event-select', e => this._handleClick(e)
@@ -124,8 +174,10 @@
                 var selectedDate = e.detail.date
                 this.date=moment(selectedDate).valueOf()
             }
+
             _AddNewEvent(){
-                var validation = true
+                var validation = true;
+
                 if (!this.$.EventName.validate()) {
                     validation = false
                 }
@@ -143,7 +195,6 @@
                         color:this.$.EventColor.value,
                         date:this.date,
                         description:this.$.EventDesc.value
-
                     }
                     this.$.mycal.addNewEvent(mData);
                     this.$.EventName.value=null,
@@ -155,6 +206,8 @@
                 }
             }
 
+
+
             _editEvent(e){
 
                 this.eventsdata=""
@@ -163,6 +216,8 @@
                 this.$.editEventDialog.open();
 
             }
+
+
             _updateEvent(){
                 var validation = true
                 if (!this.$.editEventName.validate()) {
@@ -174,6 +229,7 @@
                 if (!this.$.editEventColor.validate()) {
                     validation = false
                 }
+
 
                 if (validation) {
                     var mData = {
@@ -207,6 +263,8 @@
             _handleEvent(e){
                 var event = e.detail.event
             }
+
+
         }
 
         window.customElements.define(TestEle.is, TestEle);
